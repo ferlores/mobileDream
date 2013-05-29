@@ -386,18 +386,15 @@
                 endDrag2: function(e) {
                     if (cache.isDragging) {
                         utils.dispatchEvent('end');
+                        var width = settings.cardWidth + settings.cardMargin;
 
-                        var calc = function nearestCard(x) {
-                            var xInt = parseInt(x);
-                            if (isNaN(xInt)) {
-                                return 0;
-                            } else {
-                                return Math.round(xInt/settings.cardWidth) * settings.cardWidth;
-                            }
+                        var nearestCard = function (x) {
+                            var x = Math.round(parseInt(x, 10)/width) * width;
+                            return isNaN(x) || x >= 0 ? 0 : x + settings.cardMargin;
                          }
-                         //debugger;
-                         var goingTo = calc(cache.simpleStates.translation.absolute);
-                         action.translate.easeTo(goingTo);
+
+                        var goingTo = nearestCard(cache.simpleStates.translation.absolute);
+                        action.translate.easeTo(goingTo);
 
                         cache.isDragging = false;
                         cache.startDragX = utils.page('X', e);
