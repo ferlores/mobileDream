@@ -386,18 +386,22 @@
                 endDrag2: function(e) {
                     if (cache.isDragging) {
                         utils.dispatchEvent('end');
+                        var width = settings.cardWidth + settings.cardMargin;
 
-                        var calc = function nearestCard(x) {
-                            var xInt = parseInt(x);
-                            if (isNaN(xInt)) {
-                                return 0;
-                            } else {
-                                return Math.round(xInt/settings.cardWidth) * settings.cardWidth;
-                            }
+                        //we dont want to round at 50%, we want to round at 30, so hack here
+                        var fudge = width * .2;
+                        if (cache.simpleStates.towards === 'left') {
+                            fudge = fudge * -1;
+                        }
+
+                        var nearestCard = function (x, direction, flick) {
+                            var xx = Math.round((parseInt(x, 10) + fudge)/width) * width;
+                            return isNaN(xx) || xx >= 0 ? 0 : xx + settings.cardMargin;
+                            
                          }
-                         //debugger;
-                         var goingTo = calc(cache.simpleStates.translation.absolute);
-                         action.translate.easeTo(goingTo);
+                        var goingTo = nearestCard(cache.simpleStates.translation.absolute);
+
+                        action.translate.easeTo(goingTo);
 
                         cache.isDragging = false;
                         cache.startDragX = utils.page('X', e);
