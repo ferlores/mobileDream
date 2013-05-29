@@ -37,6 +37,7 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 	background-color: #ccc;
 	height: 100%;
 	width: 100000px;
+	padding: 0 20px;
 }
 
 .mod.card {

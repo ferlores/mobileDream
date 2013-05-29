@@ -34,9 +34,8 @@
 			minPosition: -3600,
 			maxPosition: 4000,
 			tapToClose: false,
-			cardWidth: 420,
-
-
+			cardWidth: 400,
+			cardMargin: 20
 		});
 
 		return	{
