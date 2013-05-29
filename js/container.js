@@ -1,5 +1,5 @@
 ;(function (Snap, exports) {
-	var elem, opts, cardContainer, snap;
+	var elem, opts, cardContainer, snap, viewPort;
 
 	/**
 	 * Add cards
@@ -22,9 +22,12 @@
 	function Container(element, options) {
 		elem = element;
 		opts = options;	
+		viewPort = document.createElement('div');
+		viewPort.id = 'viewPort';
 		cardContainer = document.createElement('div');
 		cardContainer.id = 'cardContainer'
-		elem.appendChild(cardContainer);
+		viewPort.appendChild(cardContainer)
+		elem.appendChild(viewPort);
 		
 		snap = new Snap({
 			element: cardContainer
