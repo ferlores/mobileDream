@@ -7,6 +7,7 @@
 	for (var i = 0; i < INITIAL_CARDS; i++) {
 		cardContent = document.createElement('p');
 		cardContent.innerHTML = EMPTY_CARD;
+		cardContent.className ="inner";
 		Container.addCard(cardContent);
 	}
 

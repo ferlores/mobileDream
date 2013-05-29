@@ -33,14 +33,18 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 .pop .bl{float:none;}
 .pop .tr{float:right;margin-right:-10px;margin-top:-1px;/*corresponding to padding*/_display:inline;/*fix double margin bug*/ }
 
-.cardContainer {
+#cardContainer {
 	background-color: #ccc;
+	height: 100%;
+	overflow: hidden;
 }
 
 .mod.card {
 	width: 80%;
+	height: 90%;
+	display: inline-block;
 	float: left;
-	margin: 0 10%;
+	margin: 5% 10%;
 	background-color: #fff;
 	overflow: hidden;
 }
