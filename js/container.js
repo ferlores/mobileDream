@@ -1,5 +1,5 @@
-;(function (exports) {
-	var elem, opts, cardContainer;
+;(function (Snap, exports) {
+	var elem, opts, cardContainer, snap;
 
 	/**
 	 * Add cards
@@ -26,6 +26,10 @@
 		cardContainer.id = 'cardContainer'
 		elem.appendChild(cardContainer);
 		
+		snap = new Snap({
+			element: cardContainer
+		});
+
 		return	{
 			addCard: addCard
 		}
@@ -33,4 +37,4 @@
 
 	exports.Container = new Container(document.getElementsByTagName('body')[0]);
 
-})(window)
+})(window.Snap, window)
