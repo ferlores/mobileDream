@@ -36,15 +36,22 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 #cardContainer {
 	background-color: #ccc;
 	height: 100%;
-	overflow: hidden;
+	width: 100000px;
 }
 
 .mod.card {
-	width: 80%;
+	width: 400px;
 	height: 90%;
 	display: inline-block;
 	float: left;
-	margin: 5% 10%;
+	margin: 10px;
 	background-color: #fff;
 	overflow: hidden;
+}
+
+#viewPort {
+	overflow: hidden;
+	width: 500px;
+	border: 10px solid black;
+	margin: auto;
 }
