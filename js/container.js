@@ -30,7 +30,13 @@
 		elem.appendChild(viewPort);
 		
 		snap = new Snap({
-			element: cardContainer
+			element: cardContainer,
+			minPosition: -3600,
+			maxPosition: 4000,
+			tapToClose: false,
+			cardWidth: 420,
+
+
 		});
 
 		return	{

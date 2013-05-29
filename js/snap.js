@@ -26,7 +26,8 @@
             tapToClose: true,
             touchToDrag: true,
             slideIntent: 40, // degrees
-            minDragDistance: 5
+            minDragDistance: 5,
+            cardWidth: 400
         },
         cache = {
             simpleStates: {
@@ -233,12 +234,12 @@
                     cache.easing = false;
                     utils.events.addEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
                     utils.events.addEvent(settings.element, utils.eventType('move'), action.drag.dragging);
-                    utils.events.addEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
+                    utils.events.addEvent(settings.element, utils.eventType('up'), action.drag.endDrag2);
                 },
                 stopListening: function() {
                     utils.events.removeEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
                     utils.events.removeEvent(settings.element, utils.eventType('move'), action.drag.dragging);
-                    utils.events.removeEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
+                    utils.events.removeEvent(settings.element, utils.eventType('up'), action.drag.endDrag2);
                 },
                 startDrag: function(e) {
                     // No drag on ignored elements
@@ -380,6 +381,26 @@
                             };
                         }
                         action.translate.x(translateTo + translated);
+                    }
+                },
+                endDrag2: function(e) {
+                    if (cache.isDragging) {
+                        utils.dispatchEvent('end');
+
+                        var calc = function nearestCard(x) {
+                            var xInt = parseInt(x);
+                            if (isNaN(xInt)) {
+                                return 0;
+                            } else {
+                                return Math.round(xInt/settings.cardWidth) * settings.cardWidth;
+                            }
+                         }
+                         //debugger;
+                         var goingTo = calc(cache.simpleStates.translation.absolute);
+                         action.translate.easeTo(goingTo);
+
+                        cache.isDragging = false;
+                        cache.startDragX = utils.page('X', e);
                     }
                 },
                 endDrag: function(e) {
