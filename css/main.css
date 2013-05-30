@@ -51,13 +51,10 @@ body {
 }
 
 #cardContainer {
-	background-color: #ccc;
 	height: 345px;
 	width: 100000px;
 	padding: 0;
 	z-index: 1;
-	background-color: transparent;
-
 }
 
 #stageLeft {
@@ -171,7 +168,7 @@ footer.borders {
 #search {
 	position: absolute;
 	left: 30px;
-	top: 4px;
+	top: 3px;
 	width: 178px;
 	height: 24px;
 	background-color: transparent;

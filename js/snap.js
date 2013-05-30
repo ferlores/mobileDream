@@ -463,6 +463,8 @@
                         }
 
                         var nearestCard = function (x, direction, flick) {
+                            // Hack to prevent the tap bring you to the first card
+                            if (x === 0) return -1;
                             var xx = Math.round((parseInt(x, 10) + fudge)/width) * width;
                             return isNaN(xx) || xx >= 0 ? 0 : xx + (settings.cardMargin * 1.1); //center cards margin left + next card margin right plus 10% to show left card edge
                             
@@ -470,7 +472,7 @@
 
                         var goingTo = nearestCard(cache.simpleStates.translation.absolute);
 
-                        action.translate.easeTo(goingTo);
+                        if (goingTo != -1) action.translate.easeTo(goingTo);
 
                         cache.isDragging = false;
                         cache.startDragX = utils.page('X', e);
