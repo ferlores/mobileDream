@@ -35,14 +35,18 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 
 #cardContainer {
 	background-color: #ccc;
-	height: 100%;
+	height: 85%;
 	width: 100000px;
 	padding: 0 20px;
 }
 
+#footer {
+	height: 15%;
+}
+
 .mod.card {
 	width: 400px;
-	height: 90%;
+	height: 95%;
 	display: inline-block;
 	float: left;
 	margin: 10px;

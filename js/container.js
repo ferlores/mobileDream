@@ -27,8 +27,14 @@
 		cardContainer = document.createElement('div');
 		cardContainer.id = 'cardContainer'
 		viewPort.appendChild(cardContainer)
+
+		var footer = document.createElement('footer');
+		footer.id = 'footer'
+		footer.appendChild(document.createTextNode("Footer"));
+		viewPort.appendChild(footer);
+
 		elem.appendChild(viewPort);
-		
+
 		snap = new Snap({
 			element: cardContainer,
 			minPosition: -3600,
@@ -36,6 +42,14 @@
 			tapToClose: false,
 			cardWidth: 400,
 			cardMargin: 20
+		});
+
+		var footerSnap = new Snap({
+			element: footer,
+			maxPosition: 460,
+			minPosition: 10,
+			tapToClose: false,
+			axis: 'vertical'
 		});
 
 		return	{
