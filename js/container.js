@@ -1,5 +1,5 @@
 ;(function (Snap, exports) {
-	var elem, opts, cardContainer, snap, viewPort;
+	var elem, opts, cardContainer, snap, viewPort, textViewPort;
 
 	/**
 	 * Add cards
@@ -40,6 +40,12 @@
 		opts = options;	
 		viewPort = document.createElement('div');
 		viewPort.id = 'viewPort';
+
+		textViewPort = document.createElement('div');
+		textViewPort.innerHTML = 'Realease to<br>refresh &larr;';
+		textViewPort.className = 'release';
+		viewPort.appendChild(textViewPort);
+
 		cardContainer = document.createElement('div');
 		cardContainer.id = 'cardContainer'
 		viewPort.appendChild(cardContainer)

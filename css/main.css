@@ -153,11 +153,11 @@ header {
 .search {
 	width: 64%;
 	background-color: #247eb6;
-	margin: 9px;
+	margin: 6px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	border-radius: 100px;
-	height: 4%;
+	height: 30px;
 	position: relative;
 }
 
@@ -171,12 +171,21 @@ header {
 }
 
 .stageLeft  {
-	height: 5%;
+	height: 30px;
 	margin: 5px;
 }
 
 .options {
 	float: right;
-	height: 5%;
+	height: 30px;
 	margin: 5px;
+}
+
+.release {
+	position: absolute;
+	top: 200px;
+	left: 30px;
+	color: white;
+	font-family: VAG;
+	text-align: center;
 }
