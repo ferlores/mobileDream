@@ -33,19 +33,46 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 .pop .bl{float:none;}
 .pop .tr{float:right;margin-right:-10px;margin-top:-1px;/*corresponding to padding*/_display:inline;/*fix double margin bug*/ }
 
+body {
+	overflow: hidden;
+	width: 320px;
+}
+
+#viewPort {
+	overflow: hidden;
+	border: 1px solid black;
+	margin: auto;
+}
+
 #cardContainer {
 	background-color: #ccc;
-	height: 85%;
+	height: 370px;
 	width: 100000px;
-	padding: 0 20px;
+	padding: 0;
+	z-index: 1;
 }
 
 #footer {
-	height: 15%;
+	top: 360px;
+	height: 370px;
+	background-color: #ddd;
+	z-index: 2;
+}
+
+#footer button {
+	display: block;
+	margin: auto;
+	padding: 5px 0;
+}
+
+#footer li {
+	display: inline-block;
+	width: 25%;
+	margin: auto;
 }
 
 .mod.card {
-	width: 400px;
+	width: 290px;
 	height: 95%;
 	display: inline-block;
 	float: left;
@@ -54,9 +81,3 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 	overflow: hidden;
 }
 
-#viewPort {
-	overflow: hidden;
-	width: 500px;
-	border: 10px solid black;
-	margin: auto;
-}

@@ -1,6 +1,6 @@
 ;(function (Container, exports) {
 	var EMPTY_CARD = 'PLACEHOLDER',
-		INITIAL_CARDS = 5,
+		INITIAL_CARDS = 15,
 		cardContent,
 		i;
 
@@ -11,4 +11,13 @@
 		Container.addCard(cardContent);
 	}
 
-})(window.Container, window)
+	// When ready...
+	window.addEventListener("load",function() {
+		// Set a timeout...
+		setTimeout(function(){
+			// Hide the address bar!
+			window.scrollTo(0, 1);
+		}, 0);
+	});
+
+})(window.Container, window);

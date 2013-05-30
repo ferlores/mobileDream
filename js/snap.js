@@ -27,7 +27,7 @@
             touchToDrag: true,
             slideIntent: 40, // degrees
             minDragDistance: 5,
-            cardWidth: 400,
+            cardWidth: 290,
             axis: 'horizontal'
         },
         cache = {
@@ -242,7 +242,7 @@
                         return;
                     }
 
-                    n = parseInt(n, 10);
+                    n = parseInt(n, 10) * -1; //not sure why i need -1 here
                     if (isNaN(n)) {
                         n = 0;
                     }
@@ -510,18 +510,22 @@
         /*
          * Public
          */
+         this.y = function(n) {
+            action.translate.y(n);
+         }
+
         this.open = function(side) {
 
             utils.klass.remove(doc.body, 'snapjs-expand-left');
             utils.klass.remove(doc.body, 'snapjs-expand-right');
 
-            if (side === 'left') {
+            if (side === 'left' || side == 'top') {
                 cache.simpleStates.opening = 'left';
                 cache.simpleStates.towards = 'right';
                 utils.klass.add(doc.body, 'snapjs-left');
                 utils.klass.remove(doc.body, 'snapjs-right');
                 action.translate.easeTo(settings.maxPosition);
-            } else if (side === 'right') {
+            } else if (side === 'right' || side == 'bottom') {
                 cache.simpleStates.opening = 'right';
                 cache.simpleStates.towards = 'left';
                 utils.klass.remove(doc.body, 'snapjs-left');
