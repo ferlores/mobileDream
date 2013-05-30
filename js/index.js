@@ -11,4 +11,6 @@
 		Container.addCard(cardContent);
 	}
 
+	Container.init();
+
 })(window.Container, window)

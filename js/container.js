@@ -7,11 +7,22 @@
 	 * @param  {Number} position where to add it, by default at the end (not implement yet)
 	 * TODO: implement position
 	 */
-	addCard = function addCard(content, position) {
+	var addCard = function addCard(content, position) {
 		var card = document.createElement('div');
 		card.appendChild(content);
 		card.className = 'mod card';
 		cardContainer.appendChild(card);
+	}
+
+	var init = function () {
+		snap = new Snap({
+			element: cardContainer,
+			minPosition: -3600,
+			maxPosition: 4000,
+			tapToClose: false,
+			cardWidth: 400,
+			cardMargin: 20
+		});
 	}
 
 	/**
@@ -28,18 +39,10 @@
 		cardContainer.id = 'cardContainer'
 		viewPort.appendChild(cardContainer)
 		elem.appendChild(viewPort);
-		
-		snap = new Snap({
-			element: cardContainer,
-			minPosition: -3600,
-			maxPosition: 4000,
-			tapToClose: false,
-			cardWidth: 400,
-			cardMargin: 20
-		});
-
+	
 		return	{
-			addCard: addCard
+			addCard: addCard,
+			init: init
 		}
 	}
 

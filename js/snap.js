@@ -217,9 +217,34 @@
                         n = 0;
                     }
 
+                    function scaleZoom (x, cardPosition) {
+                        var MAX_SCALE = 1.06,
+                            MIN_SCALE = 1;
+
+                        //TODO; clean up this code
+                        var width = settings.cardWidth + settings.cardMargin;
+                        var distance = Math.abs((cardPosition * width) + x - settings.cardMargin);
+                        
+                        // TODO: avoid this hack setting properly the margins
+                        if (cardPosition === 0){
+                            distance = distance - settings.cardMargin;
+                        }
+
+                        if (distance === 0) return MAX_SCALE;
+
+                        var scale = ((MAX_SCALE - MIN_SCALE) / distance ) + MIN_SCALE;
+                        return scale;
+                    }
+
                     if( utils.canTransform() ){
                         var theTranslate = 'translate3d(' + n + 'px, 0,0)';
                         settings.element.style[cache.vendor+'Transform'] = theTranslate;
+                        
+                        var children = settings.element.children;
+                        for(var i = 0; i < children.length; i++) {
+                            var scale = scaleZoom(n, i);
+                            settings.element.children[i].style[cache.vendor+'Transform'] = 'translate3d(0,0,0) scale(' + scale + ',' + scale + ')';
+                        }
                     } else {
                         settings.element.style.width = (win.innerWidth || doc.documentElement.clientWidth)+'px';
 
@@ -398,7 +423,8 @@
                             var xx = Math.round((parseInt(x, 10) + fudge)/width) * width;
                             return isNaN(xx) || xx >= 0 ? 0 : xx + settings.cardMargin;
                             
-                         }
+                        }
+
                         var goingTo = nearestCard(cache.simpleStates.translation.absolute);
 
                         action.translate.easeTo(goingTo);
@@ -463,6 +489,7 @@
                 utils.deepExtend(settings, opts);
                 cache.vendor = utils.vendor();
                 action.drag.listen();
+                action.translate.easeTo(0);
             }
         };
         /*

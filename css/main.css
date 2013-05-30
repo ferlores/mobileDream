@@ -48,6 +48,7 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 	margin: 10px;
 	background-color: #fff;
 	overflow: hidden;
+	border: 1px solid black;
 }
 
 #viewPort {
