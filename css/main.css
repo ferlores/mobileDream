@@ -35,8 +35,6 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 
 body {
 	overflow: hidden;
-	width: 320px;
-	height: 480px;
 	margin: 0;
 	padding: 0;
 	background-color: #2a94d6;
@@ -165,4 +163,52 @@ footer.borders {
 	font-family: VAG;
 	src: url('../fonts/VAGRoundedStdLight.ttf'),
 	     url('../fonts/VAGRoundedStdLight.eot'); /* IE9 */
+}
+
+#search {
+	position: absolute;
+	left: 30px;
+	top: 4px;
+	width: 178px;
+	height: 24px;
+	background-color: transparent;
+	border: 0;
+	color: white;
+	width: 85%;
+}
+
+header {
+	display: inline-block;
+	width: 100%;
+}
+
+.search {
+	width: 64%;
+	background-color: #247eb6;
+	margin: 9px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	height: 4%;
+	position: relative;
+}
+
+.search img {
+	width: 15px;
+	padding: 8px;
+}
+
+.stageLeft, .search  {
+	float: left;
+}
+
+.stageLeft  {
+	height: 5%;
+	margin: 5px;
+}
+
+.options {
+	float: right;
+	height: 5%;
+	margin: 5px;
 }
