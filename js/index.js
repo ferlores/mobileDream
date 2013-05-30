@@ -11,6 +11,8 @@
 		Container.addCard(cardContent);
 	}
 
+
+	Container.init();
 	// When ready...
 	window.addEventListener("load",function() {
 		// Set a timeout...

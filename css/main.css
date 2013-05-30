@@ -79,5 +79,6 @@ body {
 	margin: 10px;
 	background-color: #fff;
 	overflow: hidden;
+	border: 1px solid black;
 }
 
