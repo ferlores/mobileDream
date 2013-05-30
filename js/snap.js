@@ -227,8 +227,8 @@
                     }
 
                     function scaleZoom (x, cardPosition) {
-                        var MAX_SCALE = 1.06,
-                            MIN_SCALE = 1;
+                        var MAX_SCALE = 1,
+                            MIN_SCALE = 0.94;
 
                         //TODO; clean up this code
                         var width = settings.cardWidth + settings.cardMargin;
