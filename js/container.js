@@ -23,6 +23,14 @@
 			cardWidth: 400,
 			cardMargin: 20
 		});
+
+		var footerSnap = new Snap({
+			element: footer,
+			maxPosition: 460,
+			minPosition: 10,
+			tapToClose: false,
+			axis: 'vertical'
+		});
 	}
 
 	/**
@@ -38,8 +46,14 @@
 		cardContainer = document.createElement('div');
 		cardContainer.id = 'cardContainer'
 		viewPort.appendChild(cardContainer)
+
+		var footer = document.createElement('footer');
+		footer.id = 'footer'
+		footer.appendChild(document.createTextNode("Footer"));
+		viewPort.appendChild(footer);
+
 		elem.appendChild(viewPort);
-	
+
 		return	{
 			addCard: addCard,
 			init: init

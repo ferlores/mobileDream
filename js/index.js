@@ -1,6 +1,6 @@
 ;(function (Container, exports) {
 	var EMPTY_CARD = 'PLACEHOLDER',
-		INITIAL_CARDS = 10,
+		INITIAL_CARDS = 5,
 		cardContent,
 		i;
 

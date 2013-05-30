@@ -27,7 +27,8 @@
             touchToDrag: true,
             slideIntent: 40, // degrees
             minDragDistance: 5,
-            cardWidth: 400
+            cardWidth: 400,
+            axis: 'horizontal'
         },
         cache = {
             simpleStates: {
@@ -49,10 +50,16 @@
             hasTouch: (doc.ontouchstart === null),
             eventType: function(action) {
                 var eventTypes = {
+                        /*
                         down: (utils.hasTouch ? 'touchstart' : 'mousedown'),
                         move: (utils.hasTouch ? 'touchmove' : 'mousemove'),
                         up: (utils.hasTouch ? 'touchend' : 'mouseup'),
                         out: (utils.hasTouch ? 'touchcancel' : 'mouseout')
+                        */
+                        down: 'touchstart',
+                        move: 'touchmove',
+                        up: 'touchend',
+                        out: 'touchcancel'
                     };
                 return eventTypes[action];
             },
@@ -107,6 +114,7 @@
             },
             angleOfDrag: function(x, y) {
                 var degrees, theta;
+                
                 // Calc Theta
                 theta = Math.atan2(-(cache.startDragY - y), (cache.startDragX - x));
                 if (theta < 0) {
@@ -191,7 +199,7 @@
 
                     if( !utils.canTransform() ){
                         cache.translation = n;
-                        action.translate.x(n);
+                        action.translate.go(n);
                     } else {
                         cache.easing = true;
                         cache.easingTo = n;
@@ -203,10 +211,11 @@
                         }, 1);
 
                         utils.events.addEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
-                        action.translate.x(n);
+                        action.translate.go(n);
                     }
                     
                 },
+
                 x: function(n) {
                     if( (settings.disable=='left' && n>0) ||
                         (settings.disable=='right' && n<0)
@@ -251,8 +260,35 @@
                         settings.element.style.left = n+'px';
                         settings.element.style.right = '';
                     }
+                },
+                y: function(n) {
+                    if ((settings.disable=='top' && n > 0) ||
+                            (settings.disable=='bottom' && n < 0)){
+                        return;
+                    }
+
+                    n = parseInt(n, 10);
+                    if (isNaN(n)) {
+                        n = 0;
+                    }
+
+                    if (utils.canTransform()) {
+                        var theTranslate = 'translate3d(0,'+n+'px, 0)';
+                        settings.element.style[cache.vendor+'Transform'] = theTranslate;
+                    } else {
+                        settings.element.style.top = n = 'px';
+                        settings.element.style.bottom = '';
+                    }
+                },
+                go : function(n) {
+                    if (settings.axis=='horizontal') {
+                        action.translate.x(n);
+                    } else {
+                        action.translate.y(n);
+                    } 
                 }
             },
+
             drag: {
                 listen: function() {
                     cache.translation = 0;
@@ -331,9 +367,15 @@
 
                         if (cache.hasIntent === false || cache.hasIntent === null) {
                             var deg = utils.angleOfDrag(thePageX, thePageY),
-                                inRightRange = (deg >= 0 && deg <= settings.slideIntent) || (deg <= 360 && deg > (360 - settings.slideIntent)),
-                                inLeftRange = (deg >= 180 && deg <= (180 + settings.slideIntent)) || (deg <= 180 && deg >= (180 - settings.slideIntent));
-                            if (!inLeftRange && !inRightRange) {
+                                inFirstRange = (deg >= 0 && deg <= settings.slideIntent) || (deg <= 360 && deg > (360 - settings.slideIntent)),
+                                inSecondRange = (deg >= 180 && deg <= (180 + settings.slideIntent)) || (deg <= 180 && deg >= (180 - settings.slideIntent));
+                            
+                            if (settings.axis == 'vertical') {
+                                inFirstRange = (deg >= (90 - settings.slideIntent) && deg <= (90 + settings.slideIntent));
+                                inSecondRange = (deg >= (270 - settings.slideIntent) && deg <= (270 + settings.slideIntent));
+                            }
+
+                            if (!inSecondRange && !inFirstRange) {
                                 cache.hasIntent = false;
                             } else {
                                 cache.hasIntent = true;
@@ -405,7 +447,7 @@
                                 }
                             };
                         }
-                        action.translate.x(translateTo + translated);
+                        action.translate.go(translateTo + translated);
                     }
                 },
                 endDrag2: function(e) {
