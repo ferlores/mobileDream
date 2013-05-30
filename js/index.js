@@ -1,14 +1,18 @@
 ;(function (Container, exports) {
 	var EMPTY_CARD = 'PLACEHOLDER',
 		INITIAL_CARDS = 15,
+		cardHead,
 		cardContent,
 		i;
 
 	for (var i = 0; i < INITIAL_CARDS; i++) {
+		cardHead = document.createElement('div');
+		cardHead.innerHTML = 'Title ' + i;
+
 		cardContent = document.createElement('p');
 		cardContent.innerHTML = EMPTY_CARD + " " + i;
 		cardContent.className ="inner";
-		Container.addCard(cardContent);
+		Container.addCard(cardHead, cardContent);
 	}
 
 

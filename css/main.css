@@ -36,12 +36,18 @@ b.top, b.top b, b.bottom, b.bottom b{display:block;background-repeat:no-repeat;f
 body {
 	overflow: hidden;
 	width: 320px;
+	height: 480px;
+
+	background-color: #94B9E1;
 }
 
 #viewPort {
 	overflow: hidden;
 	border: 1px solid black;
 	margin: auto;
+
+	background-color: transparent;
+	border: 0;
 }
 
 #cardContainer {
@@ -50,6 +56,14 @@ body {
 	width: 100000px;
 	padding: 0;
 	z-index: 1;
+	background-color: transparent;
+
+}
+
+#stageLeft {
+	position: absolute;
+	height: 100%;
+	z-index: 2;
 }
 
 #footer {
@@ -77,8 +91,22 @@ body {
 	display: inline-block;
 	float: left;
 	margin: 10px;
-	background-color: #fff;
+	background-color: #eee;
 	overflow: hidden;
-	border: 1px solid black;
+	border: 0;
+
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
+.mod.card .hd {
+	background-color: #999;
+	height: 35px;
+	text-align: center;
+	padding-top: 5px
+}
+
+.mod.card .bd {
+	padding: 3px;
+}

@@ -23,7 +23,7 @@
 
 		footer.appendChild(button);
 		var footerMenu = document.createElement('ul');
-		for (var i = 0; i < 4; i++) {
+		for (var i = 0; i < 3; i++) {
 			var item = document.createElement('li');
 			item.appendChild(document.createTextNode("F" + i));
 			footerMenu.appendChild(item);

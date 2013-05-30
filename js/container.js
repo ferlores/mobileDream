@@ -7,8 +7,13 @@
 	 * @param  {Number} position where to add it, by default at the end (not implement yet)
 	 * TODO: implement position
 	 */
-	var addCard = function addCard(content, position) {
+	var addCard = function addCard(head, content, position) {
 		var card = document.createElement('div');
+
+		head.className = 'hd';
+		card.appendChild(head);
+		
+		content.className = 'bd';
 		card.appendChild(content);
 		card.className = 'mod card';
 		cardContainer.appendChild(card);
