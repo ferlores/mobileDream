@@ -453,6 +453,7 @@
                 endDrag2: function(e) {
                     if (cache.isDragging) {
                         utils.dispatchEvent('end');
+                        //remember, margin is left margin + right margin
                         var width = settings.cardWidth + settings.cardMargin;
 
                         //we dont want to round at 50%, we want to round at 30, so hack here
@@ -463,7 +464,7 @@
 
                         var nearestCard = function (x, direction, flick) {
                             var xx = Math.round((parseInt(x, 10) + fudge)/width) * width;
-                            return isNaN(xx) || xx >= 0 ? 0 : xx + settings.cardMargin;
+                            return isNaN(xx) || xx >= 0 ? 0 : xx + (settings.cardMargin * 1.1); //center cards margin left + next card margin right plus 10% to show left card edge
                             
                         }
 

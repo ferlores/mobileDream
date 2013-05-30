@@ -12,10 +12,10 @@
 
 		head.className = 'hd';
 		card.appendChild(head);
-		
+
 		content.className = 'bd';
 		card.appendChild(content);
-		card.className = 'mod card';
+		card.className = 'mod card borders';
 		cardContainer.appendChild(card);
 	}
 
@@ -25,8 +25,8 @@
 			minPosition: -3600,
 			maxPosition: 4000,
 			tapToClose: false,
-			cardWidth: 290,
-			cardMargin: 20
+			cardWidth: 270,
+			cardMargin: 10
 		});
 	}
 
