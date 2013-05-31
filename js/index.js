@@ -5,12 +5,30 @@
 		cardContent,
 		i;
 
-	for (var i = 0; i < INITIAL_CARDS; i++) {
+	debugger;
+	if (!localStorage.cache) {
+		//pretend this json came from a rest api
+		var input = ({ 'records': [
+			{'header': 'My Chatter', 'body': 'Dreamforce is awesome'},
+			{'header': '@Me', 'body': 'Looking good buddy!'},
+			{'header': 'My Agenda', 'body': '10am cofee with Marc Benioff'},
+			{'header': 'Agenda', 'body': 'A keynote you are most likely interested in'},
+			{'header': 'Maps', 'body': 'Find yourself, in the clouds.'},
+			{'header': 'Surveys', 'body': 'Hows your dreamforce experience so far?'},
+			{'header': 'Search', 'body': 'What are you looking for?'}
+		]});
+
+		localStorage.cache = JSON.stringify(input);
+	}
+
+	var output = JSON.parse(localStorage.cache);
+
+	for (var i = 0; i < output.records.length; i++) {
 		cardHead = document.createElement('div');
-		cardHead.innerHTML = 'Title ' + i;
+		cardHead.innerHTML = output.records[i].header;
 
 		cardContent = document.createElement('p');
-		cardContent.innerHTML = EMPTY_CARD + " " + i;
+		cardContent.innerHTML =output.records[i].body;
 		cardContent.className ="inner";
 		Container.addCard(cardHead, cardContent);
 	}
