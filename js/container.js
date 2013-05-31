@@ -42,7 +42,7 @@
 		viewPort.id = 'viewPort';
 
 		textViewPort = document.createElement('div');
-		textViewPort.innerHTML = 'Realease to<br>refresh &larr;';
+		textViewPort.innerHTML = 'Pull & realease<br>&larr; to refresh &rarr;';
 		textViewPort.className = 'release';
 		viewPort.appendChild(textViewPort);
 
@@ -58,6 +58,6 @@
 		}
 	}
 
-	exports.Container = new Container(document.getElementsByTagName('body')[0]);
+	exports.Container = new Container(document.getElementsByClassName('wrapper')[0]);
 
 })(window.Snap, window)
