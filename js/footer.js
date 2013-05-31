@@ -61,5 +61,5 @@
 		
 	}
 
-	exports.Footer = new Footer(document.getElementsByTagName('body')[0]);
+	exports.Footer = new Footer(document.getElementsByClassName('wrapper')[0]);
 })(window.Snap, window);
