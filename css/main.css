@@ -38,6 +38,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #2a94d6;
+	font-family: arial;
 }
 
 #viewPort {
@@ -157,7 +158,7 @@ footer.borders {
 }
 
 .mod.card .bd {
-	padding: 3px;
+	padding: 10px 20px;
 }
 
 #header {

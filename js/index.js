@@ -5,7 +5,6 @@
 		cardContent,
 		i;
 
-	debugger;
 	if (!localStorage.cache) {
 		//pretend this json came from a rest api
 		var input = ({ 'records': [
