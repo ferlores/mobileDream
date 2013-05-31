@@ -540,8 +540,8 @@
         /*
          * Public
          */
-         this.y = function(n) {
-            action.translate.y(n);
+         this.easeTo = function(n) {
+            action.translate.easeTo(n);
          }
 
         this.open = function(side) {

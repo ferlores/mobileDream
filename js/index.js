@@ -17,6 +17,8 @@
 
 
 	Container.init();
+
+	//iphone 5 doesnt need this
 	// When ready...
 	window.addEventListener("load",function() {
 		// Set a timeout...

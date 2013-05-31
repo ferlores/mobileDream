@@ -16,10 +16,10 @@
 		button.addEventListener("click",function() {
 			if (footer.dataset.status=='closed') {
 				footer.dataset.status='open';
-				snap.y(100);
+				snap.easeTo(100);
 			} else {
 				footer.dataset.status='closed';
-				snap.y(0);
+				snap.easeTo(0);
 			}
 		});
 

@@ -57,17 +57,17 @@ body {
 	z-index: 1;
 }
 
-#stageLeft {
-	position: absolute;
-	height: 100%;
-	z-index: 2;
+@media screen and (device-aspect-ratio: 40/71) {/*iphone 5 */
+	#cardContainer {
+		height: 433px;
+	}
 }
 
 footer {
-	height: 370px;
+	height: 120px;
 	background-color: #2a94d6;
 	z-index: 2;
-	width: 90%;
+	width: 288px;  
 	margin: auto;
 }
 
