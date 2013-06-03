@@ -7,15 +7,88 @@
 	 * @param  {Number} position where to add it, by default at the end (not implement yet)
 	 * TODO: implement position
 	 */
-	var addCard = function addCard(head, content, position) {
+	var addCard = function addCard(head, content, backBody, position) {
 		var card = document.createElement('div');
+		
+		var front = document.createElement('div');
+		front.className = 'mod front face';
+		
+		var frontTop = document.createElement('div');
+		frontTop.className = 'top';
+
+		var flipButton = document.createElement('img');
+		flipButton.className = 'tr flipper';
+		flipButton.src = 'img/options-icon.png';
+		
+		frontTop.appendChild(flipButton);
+		front.appendChild(frontTop);
+
+		var frontInner = document.createElement('div');
+		frontInner.className = 'inner';
+
+		/*
+			div card
+				figure front mod
+					top
+						tr
+							flip button
+					inner
+						hd bd
+				figure back mod
+					top
+						tr
+							flip button
+					inner
+						hd
+						bd
+		*/
 
 		head.className = 'hd';
-		card.appendChild(head);
+		frontInner.appendChild(head);
 
 		content.className = 'bd';
-		card.appendChild(content);
-		card.className = 'mod card borders';
+		frontInner.appendChild(content);
+		front.appendChild(frontInner);
+		card.appendChild(front);
+
+		var back = document.createElement('div');
+		back.className = 'mod back face';
+
+		var backTop = document.createElement('div');
+		backTop.className = 'top';
+		var backFlipButton = document.createElement('img');
+		backFlipButton.className = 'tr flipper';
+		backFlipButton.src = 'img/options-icon.png';
+
+		backTop.appendChild(backFlipButton);
+		back.appendChild(backTop);
+
+		var backInner = document.createElement('div');
+		backInner.className = 'inner';
+		var backHead = document.createElement('div');
+		backHead.className = 'hd';
+		backHead.innerHTML = 'Back title';
+
+		backBody.className = 'bd';
+
+		backInner.appendChild(backHead);
+		backInner.appendChild(backBody);
+		back.appendChild(backInner);
+
+		card.appendChild(back);
+		card.className = 'card borders';
+
+		card.addEventListener("click", function(e) {
+			if (e.target.tagName == 'IMG') {
+				if (this.classList.contains('flipped')) {
+					this.classList.remove('flipped');
+				} else {
+					this.classList.add('flipped');
+				}
+
+			}
+		});
+		
 		cardContainer.appendChild(card);
 	}
 

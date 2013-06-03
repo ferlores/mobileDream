@@ -3,18 +3,19 @@
 		INITIAL_CARDS = 15,
 		cardHead,
 		cardContent,
+		cardBack,
 		i;
 
 	if (!localStorage.cache) {
 		//pretend this json came from a rest api
 		var input = ({ 'records': [
-			{'header': 'My Chatter', 'body': 'Dreamforce is awesome'},
-			{'header': '@Me', 'body': 'Looking good buddy!'},
-			{'header': 'My Agenda', 'body': '10am cofee with Marc Benioff'},
-			{'header': 'Agenda', 'body': 'A keynote you are most likely interested in'},
-			{'header': 'Maps', 'body': 'Find yourself, in the clouds.'},
-			{'header': 'Surveys', 'body': 'Hows your dreamforce experience so far?'},
-			{'header': 'Search', 'body': 'What are you looking for?'}
+			{'header': 'My Chatter', 'body': 'Dreamforce is awesome', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': '@Me', 'body': 'Looking good buddy!', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': 'My Agenda', 'body': '10am cofee with Marc Benioff', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': 'Agenda', 'body': 'A keynote you are most likely interested in', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': 'Maps', 'body': 'Find yourself, in the clouds.', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': 'Surveys', 'body': 'Hows your dreamforce experience so far?', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '},
+			{'header': 'Search', 'body': 'What are you looking for?', 'back': 'Vivamus nec leo purus. Aliquam nec urna sed lacus laoreet vulputate. Suspendisse commodo felis vel dui viverra convallis. Fusce gravida suscipit viverra. Phasellus aliquam, nibh eu laoreet ullamcorper, eros mauris interdum dui, non suscipit lectus '}
 		]});
 
 		localStorage.cache = JSON.stringify(input);
@@ -29,7 +30,11 @@
 		cardContent = document.createElement('p');
 		cardContent.innerHTML =output.records[i].body;
 		cardContent.className ="inner";
-		Container.addCard(cardHead, cardContent);
+
+		cardBack = document.createElement('p');
+		cardBack.innerHTML = output.records[i].back;
+
+		Container.addCard(cardHead, cardContent, cardBack);
 	}
 
 
@@ -44,6 +49,7 @@
 			window.scrollTo(0, 1);
 		}, 0);
 	});
+
 
 	document.getElementsByTagName('body')[0].addEventListener("touchmove", function(e) {
 		e.preventDefault();

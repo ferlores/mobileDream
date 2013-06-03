@@ -17,10 +17,13 @@
 			if (footer.dataset.status=='closed') {
 				footer.dataset.status='open';
 				snap.easeTo(100);
+				button.classList.add('upsideDown');
 			} else {
 				footer.dataset.status='closed';
 				snap.easeTo(0);
+				button.classList.remove('upsideDown');
 			}
+
 		});
 
 		footer.appendChild(button);
@@ -55,6 +58,7 @@
 			maxPosition: 450,
 			minPosition: 30,
 			tapToClose: false,
+			touchToDrag: false,
 			axis: 'vertical'
 		});
 
