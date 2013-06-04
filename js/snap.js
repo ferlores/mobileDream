@@ -483,8 +483,8 @@
                         //remember, margin is left margin + right margin
                         var width = settings.cardWidth + settings.cardMargin;
 
-                        //we dont want to round at 50%, we want to round at 30, so hack here
-                        var fudge = width * .2;
+                        //we dont want to round at 50%, we want to round at 10, so hack here
+                        var fudge = width * .8;
                         if (cache.simpleStates.towards === 'left') {
                             fudge = fudge * -1;
                         }
