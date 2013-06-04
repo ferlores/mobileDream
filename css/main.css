@@ -233,6 +233,13 @@ header {
 	height: 420px;*/
 }
 
+.paused{
+    -webkit-animation-play-state:paused;
+    -moz-animation-play-state:paused;
+    -o-animation-play-state:paused; 
+    animation-play-state:paused;
+}
+
 @media (max-width: 2000px) {
 	#cardContainer {
 		padding-left: 40%;

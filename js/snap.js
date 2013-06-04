@@ -20,7 +20,7 @@
             resistance: 0.5,
             flickThreshold: 50,
             transitionSpeed: 0.3,
-            easing: 'ease',
+            easing: 'linear',
             maxPosition: 266,
             minPosition: -266,
             tapToClose: true,
@@ -59,7 +59,8 @@
                         down: 'touchstart',
                         move: 'touchmove',
                         up: 'touchend',
-                        out: 'touchcancel'
+                        out: 'touchcancel',
+                        endTransition: 'webkitTransitionEnd'
                     };
                 return eventTypes[action];
             },
@@ -296,11 +297,13 @@
                     utils.events.addEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
                     utils.events.addEvent(settings.element, utils.eventType('move'), action.drag.dragging);
                     utils.events.addEvent(settings.element, utils.eventType('up'), action.drag.endDrag2);
+                    utils.events.addEvent(settings.element, utils.eventType('endTransition'), action.drag.endTransition);
                 },
                 stopListening: function() {
                     utils.events.removeEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
                     utils.events.removeEvent(settings.element, utils.eventType('move'), action.drag.dragging);
                     utils.events.removeEvent(settings.element, utils.eventType('up'), action.drag.endDrag2);
+                    utils.events.removeEvent(settings.element, utils.eventType('endTransition'), action.drag.endTransition);
                 },
                 startDrag: function(e) {
                     // No drag on ignored elements
@@ -324,6 +327,21 @@
                         hold: 0,
                         state: ''
                     };
+                    cache.start = Date.now();
+
+                    // cache.translation = action.translate.get.matrix(4);
+                    var t = cache.lastTranslation;
+
+                    if (t) {
+                        cache.translation = -(Date.now() - t.started) * -(t.endPosition - t.startPosition) / t.duration + t.startPosition;
+                        console.log(t, cache.translation, t.startPosition)
+                        var ts = settings.transitionSpeed;
+                        settings.transitionSpeed = 0;
+                        action.translate.easeTo(cache.translation);
+                        settings.transitionSpeed = ts;
+                    }
+
+
                     cache.simpleStates = {
                         opening: null,
                         towards: null,
@@ -337,6 +355,7 @@
                             percentage: 0
                         }
                     };
+
                 },
                 dragging: function(e) {
                     if (cache.isDragging && settings.touchToDrag) {
@@ -447,12 +466,20 @@
                                 }
                             };
                         }
+                        // console.log('x:' + thePageX)
+                        // console.log(absoluteTranslation)
+                        // console.log('--')
+
                         action.translate.go(translateTo + translated);
                     }
                 },
                 endDrag2: function(e) {
                     if (cache.isDragging) {
                         utils.dispatchEvent('end');
+
+                        var swipeTime = ~~Date.now() - ~~cache.start;
+                        var swipeSize = Math.abs(cache.simpleStates.translation.relative);
+
                         //remember, margin is left margin + right margin
                         var width = settings.cardWidth + settings.cardMargin;
 
@@ -470,13 +497,37 @@
                             
                         }
 
-                        var goingTo = nearestCard(cache.simpleStates.translation.absolute);
+                        var goingTo;
+                        if (swipeTime < 100) {
+                            goingTo = cache.simpleStates.towards === 'right' ? 0 : nearestCard(-width * 6);
+                            settings.transitionSpeed = 1
 
-                        if (goingTo != -1) action.translate.easeTo(goingTo);
+                        } else {
+                            goingTo = nearestCard(cache.simpleStates.translation.absolute);
+                        }
+                        
+                        if (goingTo != -1) {
+                            cache.lastTranslation = {
+                                started: Date.now(),
+                                startPosition: cache.simpleStates.translation.absolute,
+                                endPosition: goingTo,
+                                duration: settings.transitionSpeed * 1000
+                            }
+                            action.translate.easeTo(goingTo);
+                        } 
+
+                        settings.transitionSpeed = 0.3
 
                         cache.isDragging = false;
-                        cache.startDragX = utils.page('X', e);
+                        // cache.startDragX = utils.page('X', e);
+
+                        // console.log('Size:' + swipeSize);
+                        // console.log('Time:' + swipeTime);
+
                     }
+                },
+                endTransition: function (e) {
+                    delete(cache.lastTranslation);
                 },
                 endDrag: function(e) {
                     if (cache.isDragging) {
