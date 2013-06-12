@@ -229,7 +229,7 @@
 
                     function scaleZoom (x, cardPosition) {
                         var MAX_SCALE = 1,
-                            MIN_SCALE = 0.94;
+                            MIN_SCALE = 0.5;
 
                         //TODO; clean up this code
                         var width = settings.cardWidth + settings.cardMargin;
@@ -240,9 +240,10 @@
                             distance = distance - settings.cardMargin;
                         }
 
-                        if (distance === 0) return MAX_SCALE;
+                        var pageWidth = width * settings.element.children.length;
 
-                        var scale = ((MAX_SCALE - MIN_SCALE) / distance ) + MIN_SCALE;
+                        var cardOffset = (1 - (distance / pageWidth));
+                        var scale = (cardOffset * (MAX_SCALE - MIN_SCALE)) + MIN_SCALE;
                         return scale;
                     }
 
