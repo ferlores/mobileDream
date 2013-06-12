@@ -255,6 +255,7 @@
                         for(var i = 0; i < children.length; i++) {
                             var scale = scaleZoom(n, i);
                             settings.element.children[i].style[cache.vendor+'Transform'] = 'translate3d(0,0,0) scale(' + scale + ',' + scale + ')';
+                            settings.element.children[i].style['opacity'] = scale;
                         }
                     } else {
                         settings.element.style.width = (win.innerWidth || doc.documentElement.clientWidth)+'px';
