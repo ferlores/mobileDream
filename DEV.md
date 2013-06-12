@@ -2,7 +2,8 @@
 
 ##### Zoom
 
-* Smooth zoom in/out to give a sense of focus on center item
+DONE Smooth zoom in/out to give a sense of focus on center item
+DONE Fade opacity as cards are further away from center
 
 
 ##### Momentum
